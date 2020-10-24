@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewRestoranTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewRestoranLabel_idrestorana}"/>
+                    <h:outputText value="#{restoranController.selected.idrestorana}" title="#{bundle.ViewRestoranTitle_idrestorana}"/>
+                    <h:outputText value="#{bundle.ViewRestoranLabel_naziv}"/>
+                    <h:outputText value="#{restoranController.selected.naziv}" title="#{bundle.ViewRestoranTitle_naziv}"/>
+                    <h:outputText value="#{bundle.ViewRestoranLabel_pib}"/>
+                    <h:outputText value="#{restoranController.selected.pib}" title="#{bundle.ViewRestoranTitle_pib}"/>
+                    <h:outputText value="#{bundle.ViewRestoranLabel_adresa}"/>
+                    <h:outputText value="#{restoranController.selected.adresa}" title="#{bundle.ViewRestoranTitle_adresa}"/>
+                    <h:outputText value="#{bundle.ViewRestoranLabel_userid}"/>
+                    <h:outputText value="#{restoranController.selected.userid}" title="#{bundle.ViewRestoranTitle_userid}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{restoranController.destroyAndView}" value="#{bundle.ViewRestoranDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewRestoranEditLink}"/>
+                <br />
+                <h:commandLink action="#{restoranController.prepareCreate}" value="#{bundle.ViewRestoranCreateLink}" />
+                <br />
+                <h:commandLink action="#{restoranController.prepareList}" value="#{bundle.ViewRestoranShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewRestoranIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditRecenzijeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditRecenzijeLabel_recenzijeid}" for="recenzijeid" />
+                    <h:inputText id="recenzijeid" value="#{recenzijeController.selected.recenzijeid}" title="#{bundle.EditRecenzijeTitle_recenzijeid}" required="true" requiredMessage="#{bundle.EditRecenzijeRequiredMessage_recenzijeid}"/>
+                    <h:outputLabel value="#{bundle.EditRecenzijeLabel_ocena}" for="ocena" />
+                    <h:inputText id="ocena" value="#{recenzijeController.selected.ocena}" title="#{bundle.EditRecenzijeTitle_ocena}" />
+                    <h:outputLabel value="#{bundle.EditRecenzijeLabel_idporudzbina}" for="idporudzbina" />
+                    <h:selectOneMenu id="idporudzbina" value="#{recenzijeController.selected.idporudzbina}" title="#{bundle.EditRecenzijeTitle_idporudzbina}" >
+                        <f:selectItems value="#{porudzbinaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{recenzijeController.update}" value="#{bundle.EditRecenzijeSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditRecenzijeViewLink}"/>
+                <br />
+                <h:commandLink action="#{recenzijeController.prepareList}" value="#{bundle.EditRecenzijeShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditRecenzijeIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

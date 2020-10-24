@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListRecenzijeTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+        <h:form styleClass="jsfcrud_list_form">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:outputText escape="false" value="#{bundle.ListRecenzijeEmpty}" rendered="#{recenzijeController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{recenzijeController.items.rowCount > 0}">
+                <h:outputText value="#{recenzijeController.pagination.pageFirstItem + 1}..#{recenzijeController.pagination.pageLastItem + 1}/#{recenzijeController.pagination.itemsCount}"/>&nbsp;
+                <h:commandLink action="#{recenzijeController.previous}" value="#{bundle.Previous} #{recenzijeController.pagination.pageSize}" rendered="#{recenzijeController.pagination.hasPreviousPage}"/>&nbsp;
+                <h:commandLink action="#{recenzijeController.next}" value="#{bundle.Next} #{recenzijeController.pagination.pageSize}" rendered="#{recenzijeController.pagination.hasNextPage}"/>&nbsp;
+                <h:dataTable value="#{recenzijeController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListRecenzijeTitle_recenzijeid}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.recenzijeid}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListRecenzijeTitle_ocena}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.ocena}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundle.ListRecenzijeTitle_idporudzbina}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idporudzbina}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="&nbsp;"/>
+                        </f:facet>
+                        <h:commandLink action="#{recenzijeController.prepareView}" value="#{bundle.ListRecenzijeViewLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{recenzijeController.prepareEdit}" value="#{bundle.ListRecenzijeEditLink}"/>
+                        <h:outputText value=" "/>
+                        <h:commandLink action="#{recenzijeController.destroy}" value="#{bundle.ListRecenzijeDestroyLink}"/>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+            <br />
+            <h:commandLink action="#{recenzijeController.prepareCreate}" value="#{bundle.ListRecenzijeCreateLink}"/>
+            <br />
+            <br />
+            <h:link outcome="/index" value="#{bundle.ListRecenzijeIndexLink}"/>
+        </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

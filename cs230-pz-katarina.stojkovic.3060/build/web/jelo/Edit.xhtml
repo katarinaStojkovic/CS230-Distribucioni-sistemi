@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditJeloTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditJeloLabel_idjela}" for="idjela" />
+                    <h:inputText id="idjela" value="#{jeloController.selected.idjela}" title="#{bundle.EditJeloTitle_idjela}" required="true" requiredMessage="#{bundle.EditJeloRequiredMessage_idjela}"/>
+                    <h:outputLabel value="#{bundle.EditJeloLabel_cena}" for="cena" />
+                    <h:inputText id="cena" value="#{jeloController.selected.cena}" title="#{bundle.EditJeloTitle_cena}" />
+                    <h:outputLabel value="#{bundle.EditJeloLabel_opis}" for="opis" />
+                    <h:inputText id="opis" value="#{jeloController.selected.opis}" title="#{bundle.EditJeloTitle_opis}" />
+                    <h:outputLabel value="#{bundle.EditJeloLabel_nazivJela}" for="nazivJela" />
+                    <h:inputText id="nazivJela" value="#{jeloController.selected.nazivJela}" title="#{bundle.EditJeloTitle_nazivJela}" />
+                    <h:outputLabel value="#{bundle.EditJeloLabel_idrestorana}" for="idrestorana" />
+                    <h:selectOneMenu id="idrestorana" value="#{jeloController.selected.idrestorana}" title="#{bundle.EditJeloTitle_idrestorana}" >
+                        <f:selectItems value="#{restoranController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{jeloController.update}" value="#{bundle.EditJeloSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditJeloViewLink}"/>
+                <br />
+                <h:commandLink action="#{jeloController.prepareList}" value="#{bundle.EditJeloShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditJeloIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

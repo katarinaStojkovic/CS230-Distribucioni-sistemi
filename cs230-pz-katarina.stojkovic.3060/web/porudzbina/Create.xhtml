@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePorudzbinaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreatePorudzbinaLabel_idporudzbina}" for="idporudzbina" />
+                    <h:inputText id="idporudzbina" value="#{porudzbinaController.selected.idporudzbina}" title="#{bundle.CreatePorudzbinaTitle_idporudzbina}" required="true" requiredMessage="#{bundle.CreatePorudzbinaRequiredMessage_idporudzbina}"/>
+                    <h:outputLabel value="#{bundle.CreatePorudzbinaLabel_datumisporuke}" for="datumisporuke" />
+                    <h:inputText id="datumisporuke" value="#{porudzbinaController.selected.datumisporuke}" title="#{bundle.CreatePorudzbinaTitle_datumisporuke}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreatePorudzbinaLabel_vremeisporuke}" for="vremeisporuke" />
+                    <h:inputText id="vremeisporuke" value="#{porudzbinaController.selected.vremeisporuke}" title="#{bundle.CreatePorudzbinaTitle_vremeisporuke}" >
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreatePorudzbinaLabel_adresaisporuke}" for="adresaisporuke" />
+                    <h:inputText id="adresaisporuke" value="#{porudzbinaController.selected.adresaisporuke}" title="#{bundle.CreatePorudzbinaTitle_adresaisporuke}" />
+                    <h:outputLabel value="#{bundle.CreatePorudzbinaLabel_kolicina}" for="kolicina" />
+                    <h:inputText id="kolicina" value="#{porudzbinaController.selected.kolicina}" title="#{bundle.CreatePorudzbinaTitle_kolicina}" />
+                    <h:outputLabel value="#{bundle.CreatePorudzbinaLabel_idjela}" for="idjela" />
+                    <h:selectOneMenu id="idjela" value="#{porudzbinaController.selected.idjela}" title="#{bundle.CreatePorudzbinaTitle_idjela}" required="true" requiredMessage="#{bundle.CreatePorudzbinaRequiredMessage_idjela}">
+                        <f:selectItems value="#{jeloController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreatePorudzbinaLabel_userid}" for="userid" />
+                    <h:selectOneMenu id="userid" value="#{porudzbinaController.selected.userid}" title="#{bundle.CreatePorudzbinaTitle_userid}" required="true" requiredMessage="#{bundle.CreatePorudzbinaRequiredMessage_userid}">
+                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{porudzbinaController.create}" value="#{bundle.CreatePorudzbinaSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{porudzbinaController.prepareList}" value="#{bundle.CreatePorudzbinaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreatePorudzbinaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

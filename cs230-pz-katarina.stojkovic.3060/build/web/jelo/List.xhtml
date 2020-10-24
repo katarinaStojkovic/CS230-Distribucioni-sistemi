@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListJeloTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListJeloEmpty}" rendered="#{jeloController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{jeloController.items.rowCount > 0}">
+                    <h:outputText value="#{jeloController.pagination.pageFirstItem + 1}..#{jeloController.pagination.pageLastItem + 1}/#{jeloController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{jeloController.previous}" value="#{bundle.Previous} #{jeloController.pagination.pageSize}" rendered="#{jeloController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{jeloController.next}" value="#{bundle.Next} #{jeloController.pagination.pageSize}" rendered="#{jeloController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{jeloController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListJeloTitle_idjela}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idjela}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListJeloTitle_cena}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cena}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListJeloTitle_opis}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.opis}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListJeloTitle_nazivJela}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nazivJela}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListJeloTitle_idrestorana}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idrestorana}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{jeloController.prepareView}" value="#{bundle.ListJeloViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{jeloController.prepareEdit}" value="#{bundle.ListJeloEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{jeloController.destroy}" value="#{bundle.ListJeloDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{jeloController.prepareCreate}" value="#{bundle.ListJeloCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListJeloIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

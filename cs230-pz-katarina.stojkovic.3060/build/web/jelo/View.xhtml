@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewJeloTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewJeloLabel_idjela}"/>
+                    <h:outputText value="#{jeloController.selected.idjela}" title="#{bundle.ViewJeloTitle_idjela}"/>
+                    <h:outputText value="#{bundle.ViewJeloLabel_cena}"/>
+                    <h:outputText value="#{jeloController.selected.cena}" title="#{bundle.ViewJeloTitle_cena}"/>
+                    <h:outputText value="#{bundle.ViewJeloLabel_opis}"/>
+                    <h:outputText value="#{jeloController.selected.opis}" title="#{bundle.ViewJeloTitle_opis}"/>
+                    <h:outputText value="#{bundle.ViewJeloLabel_nazivJela}"/>
+                    <h:outputText value="#{jeloController.selected.nazivJela}" title="#{bundle.ViewJeloTitle_nazivJela}"/>
+                    <h:outputText value="#{bundle.ViewJeloLabel_idrestorana}"/>
+                    <h:outputText value="#{jeloController.selected.idrestorana}" title="#{bundle.ViewJeloTitle_idrestorana}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{jeloController.destroyAndView}" value="#{bundle.ViewJeloDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewJeloEditLink}"/>
+                <br />
+                <h:commandLink action="#{jeloController.prepareCreate}" value="#{bundle.ViewJeloCreateLink}" />
+                <br />
+                <h:commandLink action="#{jeloController.prepareList}" value="#{bundle.ViewJeloShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewJeloIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateRestoranTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateRestoranLabel_idrestorana}" for="idrestorana" />
+                    <h:inputText id="idrestorana" value="#{restoranController.selected.idrestorana}" title="#{bundle.CreateRestoranTitle_idrestorana}" required="true" requiredMessage="#{bundle.CreateRestoranRequiredMessage_idrestorana}"/>
+                    <h:outputLabel value="#{bundle.CreateRestoranLabel_naziv}" for="naziv" />
+                    <h:inputText id="naziv" value="#{restoranController.selected.naziv}" title="#{bundle.CreateRestoranTitle_naziv}" />
+                    <h:outputLabel value="#{bundle.CreateRestoranLabel_pib}" for="pib" />
+                    <h:inputText id="pib" value="#{restoranController.selected.pib}" title="#{bundle.CreateRestoranTitle_pib}" />
+                    <h:outputLabel value="#{bundle.CreateRestoranLabel_adresa}" for="adresa" />
+                    <h:inputText id="adresa" value="#{restoranController.selected.adresa}" title="#{bundle.CreateRestoranTitle_adresa}" />
+                    <h:outputLabel value="#{bundle.CreateRestoranLabel_userid}" for="userid" />
+                    <h:selectOneMenu id="userid" value="#{restoranController.selected.userid}" title="#{bundle.CreateRestoranTitle_userid}" >
+                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{restoranController.create}" value="#{bundle.CreateRestoranSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{restoranController.prepareList}" value="#{bundle.CreateRestoranShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateRestoranIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

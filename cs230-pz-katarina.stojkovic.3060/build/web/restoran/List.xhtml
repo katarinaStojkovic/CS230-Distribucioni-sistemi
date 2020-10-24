@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListRestoranTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListRestoranEmpty}" rendered="#{restoranController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{restoranController.items.rowCount > 0}">
+                    <h:outputText value="#{restoranController.pagination.pageFirstItem + 1}..#{restoranController.pagination.pageLastItem + 1}/#{restoranController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{restoranController.previous}" value="#{bundle.Previous} #{restoranController.pagination.pageSize}" rendered="#{restoranController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{restoranController.next}" value="#{bundle.Next} #{restoranController.pagination.pageSize}" rendered="#{restoranController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{restoranController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRestoranTitle_idrestorana}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idrestorana}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRestoranTitle_naziv}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.naziv}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRestoranTitle_pib}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pib}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRestoranTitle_adresa}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.adresa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListRestoranTitle_userid}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.userid}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{restoranController.prepareView}" value="#{bundle.ListRestoranViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{restoranController.prepareEdit}" value="#{bundle.ListRestoranEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{restoranController.destroy}" value="#{bundle.ListRestoranDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{restoranController.prepareCreate}" value="#{bundle.ListRestoranCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListRestoranIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
